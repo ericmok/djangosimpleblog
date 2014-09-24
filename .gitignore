@@ -1,0 +1,22 @@
+__pycache__
+*.pyc
+*.py[cod]
+
+*.sqlite3
+
+*.log
+pip-log.txt
+
+# Translations
+*.mo
+*.pot
+
+# Vim
+*~
+*.swp
+*.swo
+
+# npm
+node_modules/
+
+.sass-cache
