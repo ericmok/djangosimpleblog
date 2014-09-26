@@ -7,4 +7,4 @@ from users.forms import RegisterForm
 
 class RegisterView(FormView):
     form_class = RegisterForm
-    success_url = ''
+    success_url = reverse_lazy('users-register')
