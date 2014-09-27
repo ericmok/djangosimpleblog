@@ -83,7 +83,7 @@ class Post(AbstractDateModel):
                 reference_model = get_model_class(self.reference_type).objects.get(pk=self.reference_id)
                 return reference_model
             except DoesNotExist:
-                raise IntegrityError('Reference does not exist')
+                return None
 
     def save(self, **kwargs):
         with transaction.atomic():
