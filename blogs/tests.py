@@ -75,4 +75,4 @@ class PostTests(TestCase):
         new_post_reply.set_reference_from_type_and_id('Edition', new_post.id)
         new_post_reply.save()
 
-        self.assertEqual(Post.objects.count(), 2)        
+        self.assertEqual(Post.objects.count(), 2)
