@@ -4,13 +4,6 @@ from django.conf import settings
 from django.template.defaultfilters import slugify
 
 
-POSTABLE_MODEL_CHOICES = (('Edition', 'Edition'), ('Quote', 'Quote'))
-POSTABLE_MODEL_NAMES = [p[0] for p in POSTABLE_MODEL_CHOICES]
-
-def get_model_class(name):
-    return {'Edition': Edition, 'Quote': Quote}[name]
-
-
 class AbstractDateModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
@@ -32,9 +25,6 @@ class PostManager(models.Manager):
 
 
 class Post(AbstractDateModel):
-    reference_type = models.CharField(max_length=16, choices=POSTABLE_MODEL_CHOICES, null=True, blank=True, default=None)
-    reference_id = models.PositiveIntegerField(null=True, blank=True)
-
     title = models.CharField(max_length=128)
     slug = models.SlugField(max_length=128, unique=True)
 
@@ -57,34 +47,6 @@ class Post(AbstractDateModel):
         self.slug = new_slug
         return new_slug
 
-    def set_reference_from_model(self, reference_model):
-        if reference_model.__class__.__name__ in POSTABLE_MODEL_NAMES:
-            self.reference_type = reference_model.__class__.__name__
-            self.reference_id = reference_model.id
-        else:
-            raise ValueError('reference_type must be in POSTABLE_MODEL_CHOICES')
-
-    def set_reference_from_type_and_id(self, reference_type, reference_id):
-        if reference_type in POSTABLE_MODEL_NAMES:
-            try:
-                existence_check = get_model_class(reference_type).objects.get(pk=reference_id)
-                self.reference_type = reference_type
-                self.reference_id = reference_id
-            except:
-                raise IntegrityError('Reference does not exist')
-        else:
-            raise ValueError('reference_type must be in POSTABLE_MODEL_CHOICES')
-
-    def get_reference(self):
-        if self.reference_type not in POSTABLE_MODEL_CHOICES:
-            raise ValueError('reference_type must be in POSTABLE_MODEL_CHOICES')
-        else:
-            try:
-                reference_model = get_model_class(self.reference_type).objects.get(pk=self.reference_id)
-                return reference_model
-            except DoesNotExist:
-                return None
-
     def save(self, **kwargs):
         with transaction.atomic():
             self.generate_unique_slug()
@@ -97,16 +59,6 @@ class Edition(AbstractDateModel):
 
     def get_text(self):
         return self.text
-
-
-class Quote(models.Model):
-    edition = models.ForeignKey('Edition')
-    start = models.IntegerField()
-    end = models.IntegerField()
-    order = models.IntegerField()
-
-    class Meta:
-        ordering = ['order']
 
 
 class Tag(models.Model):

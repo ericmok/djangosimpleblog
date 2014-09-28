@@ -41,38 +41,3 @@ class PostTests(TestCase):
         post.generate_unique_slug()
         post.save()
         self.assertEqual(post.slug, '1test-title')
-
-    def test_can_set_reference_from_model_with_edition(self):
-        new_post = Post.objects.create_with_edition(title='test', author=self.new_user, text='Test is a test.')
-
-        new_post_reply = Post.objects.create_with_edition(title='test', author=self.new_user, text='Test is a test.')
-        new_post_reply.set_reference_from_model(new_post.editions.first())
-        new_post_reply.save()
-
-        self.assertEqual(Post.objects.count(), 2)
-
-    def test_can_set_reference_from_model_with_quote(self):
-        new_post = Post.objects.create_with_edition(title='test', author=self.new_user, text='Test is a test.')
-
-        new_post_reply = Post.objects.create_with_edition(title='test', author=self.new_user, text='Test is a test.')
-        new_post_reply.set_reference_from_model(new_post.editions.first())
-        new_post_reply.save()
-
-        self.assertEqual(Post.objects.count(), 2)
-
-    def test_raise_error_when_set_reference_from_model_with_wrong_model(self):
-        new_post = Post.objects.create_with_edition(title='test', author=self.new_user, text='Test is a test.')
-        def should_throw_error():
-            new_post.set_reference_from_model(User.objects.create(username='blah', password='blah'))
-
-        self.assertRaises(ValueError, should_throw_error)
-
-
-    def test_can_set_reference_from_type_and_id(self):
-        new_post = Post.objects.create_with_edition(title='test', author=self.new_user, text='Test is a test.')
-
-        new_post_reply = Post.objects.create_with_edition(title='test', author=self.new_user, text='Test is a test.')
-        new_post_reply.set_reference_from_type_and_id('Edition', new_post.id)
-        new_post_reply.save()
-
-        self.assertEqual(Post.objects.count(), 2)
