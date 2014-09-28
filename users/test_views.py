@@ -32,6 +32,5 @@ class SignInCase(TestCase):
 
     def test_can_login(self):
         user = User.objects.create_user(username='blah', password='blah')
-        response = self.client.post(reverse('users-signin'), data={'username': user.username, 'password': user.password})
-        print('RESPONSE ' + response)
-        self.assertEqual(response.status_code, 301)
+        response = self.client.post(reverse('users-signin'), data={'username': user.username, 'password': 'blah'})
+        self.assertEqual(response.status_code, 302)
