@@ -17,8 +17,12 @@ class RegisterTestCase(TestCase):
 
     def test_can_register_user(self):
         self.assertEqual(User.objects.count(), 0)
-        response = self.client.post(reverse('users-register'), data={'username':'blah', 'password':'blah'})
-        self.assertEqual(response.status_code, 302)        
+        response = self.client.post(reverse('users-register'), 
+                                    data={'username':'blah', 
+                                          'password1':'blah',
+                                          'password2':'blah'})
+        print(response.content)
+        self.assertEqual(response.status_code, 302)
         self.assertEqual(User.objects.count(), 1)
 
 class SignInCase(TestCase):
