@@ -3,6 +3,8 @@ from django.test import Client
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 
+from users.models import User
+
 
 class RegisterTestCase(TestCase):
 
@@ -19,5 +21,6 @@ class LoginTestCase(TestCase):
         self.client = Client()
 
     def test_can_login(self):
-        response = self.client.post(reverse('users-login'))
+        user = User.objects.create(username='blah', password='blah')
+        response = self.client.post(reverse('users-login'), data={'username': user.username, 'password': user.password})
         self.assertEqual(response.status_code, 301)
