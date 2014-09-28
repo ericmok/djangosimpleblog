@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.test import Client
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+from django.contrib.auth import SESSION_KEY
 
 from users.models import User
 
@@ -34,3 +35,8 @@ class SignInCase(TestCase):
         user = User.objects.create_user(username='blah', password='blah')
         response = self.client.post(reverse('users-signin'), data={'username': user.username, 'password': 'blah'})
         self.assertEqual(response.status_code, 302)
+
+    def test_can_logout(self):
+        response = self.client.get(reverse('users-signout'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(SESSION_KEY not in self.client.session)
