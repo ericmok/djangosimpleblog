@@ -22,7 +22,6 @@ class RegisterTestCase(TestCase):
                                     data={'username':'blah', 
                                           'password1':'blah',
                                           'password2':'blah'})
-        print(response.content)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(User.objects.count(), 1)
 
