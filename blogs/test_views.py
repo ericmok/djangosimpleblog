@@ -32,3 +32,10 @@ class PostViews(TestCase):
         
         response = self.client.get(reverse('posts-detail', kwargs={'slug': 'test'}))
         self.assertEqual(response.status_code, 200)
+
+    def test_post_detail_get_request_on_not_found(self):
+        user = User.objects.create_user(username='asdf', password='asdf')
+        new_post = Post.objects.create_with_edition(title='test', author=user, text='This is a test.')
+        
+        response = self.client.get(reverse('posts-detail', kwargs={'slug': 'testasdf'}))
+        self.assertEqual(response.status_code, 404)        
