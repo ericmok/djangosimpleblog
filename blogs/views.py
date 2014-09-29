@@ -11,8 +11,9 @@ from .forms import PostModelForm, PostCreationForm, PostUpdateForm
 from .models import Post, Edition
 
 
-class PostCreationView(View):
+class PostCreationView(LoginRequiredMixin, View):
     form_class = PostModelForm
+    login_url = reverse_lazy('users-signin')
     template_name = 'blogs/posts_create.html'
 
     def get(self, request, *args, **kwargs):

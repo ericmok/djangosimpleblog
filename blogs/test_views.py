@@ -14,8 +14,14 @@ class PostViews(TestCase):
         self.client = Client()
 
     def test_GET_post_create(self):
+        new_user = get_user_model().objects.create_user(username='asdf', password='asdf')
+        self.client.login(username='asdf', password='asdf')
         response = self.client.get(reverse('posts-create'))
         self.assertEqual(response.status_code, 200)
+
+    def test_GET_post_create_401(self):
+        response = self.client.get(reverse('posts-create'))
+        self.assertEqual(response.status_code, 302)
 
     def test_POST_post_create(self):
         new_user = get_user_model().objects.create_user(username='asdf', password='asdf')
