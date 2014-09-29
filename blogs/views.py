@@ -1,13 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.conf import settings
 from django.views.generic import View
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
+from django.core.urlresolvers import reverse_lazy, reverse
 
 from braces.views import LoginRequiredMixin
 
 from .forms import PostModelForm
 from .models import Post, Edition
+
 
 class PostCreationView(View):
     form_class = PostModelForm
@@ -16,6 +18,16 @@ class PostCreationView(View):
     def get(self, request, *args, **kwargs):
         form = PostModelForm()
         return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        post = Post()
+        post.author = request.user
+        form = PostModelForm(request.POST, instance=post)
+        if form.is_valid():
+            new_post = form.save()
+            return redirect(reverse('posts-detail', kwargs={'slug': new_post.slug}))
+        else:
+            return render(request, self.template_name, {'form': form})
 
 
 class PostDetailView(View):
