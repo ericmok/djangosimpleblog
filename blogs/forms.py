@@ -15,8 +15,10 @@ class PostCreationForm(forms.Form):
 
     def __init__(self, request=None, *args, **kwargs):
         self.request = request
+        super(PostCreationForm, self).__init__(*args, **kwargs)
 
     def save(self):
         title = self.cleaned_data['title']
+        author = self.request.user
         text = self.cleaned_data['text']
-        Post.objects.create_with_edition(title=title, author=request.user, text=text)
+        return Post.objects.create_with_edition(title=title, author=author, text=text)

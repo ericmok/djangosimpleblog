@@ -18,10 +18,11 @@ class PostViews(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_post_create_post_request(self):
-        get_user_model().objects.create_user(username='asdf', password='asdf')
+        new_user = get_user_model().objects.create_user(username='asdf', password='asdf')
         self.client.login(username='asdf', password='asdf')
         response = self.client.post(reverse('posts-create'), data={
-                'title': 'Test'
+                'title': 'Test',
+                'text': 'Some text'
             })
         self.assertEqual(response.status_code, 302)
         self.assertEqual(Post.objects.count(), 1)

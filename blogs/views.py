@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse_lazy, reverse
 
 from braces.views import LoginRequiredMixin
 
-from .forms import PostModelForm
+from .forms import PostModelForm, PostCreationForm
 from .models import Post, Edition
 
 
@@ -20,9 +20,7 @@ class PostCreationView(View):
         return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
-        post = Post()
-        post.author = request.user
-        form = PostModelForm(request.POST, instance=post)
+        form = PostCreationForm(request, request.POST)
         if form.is_valid():
             new_post = form.save()
             return redirect(reverse('posts-detail', kwargs={'slug': new_post.slug}))
