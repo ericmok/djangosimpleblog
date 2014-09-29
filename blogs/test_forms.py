@@ -2,7 +2,7 @@ from django.test import TestCase, RequestFactory
 from django.contrib.auth import get_user_model
 
 from blogs.models import Post, Edition
-from blogs.forms import PostModelForm, PostCreationForm
+from blogs.forms import PostModelForm, PostCreationForm, PostUpdateForm
 
 
 User = get_user_model()
@@ -40,3 +40,16 @@ class PostCreationFormTest(TestCase):
 
         self.assertTrue(result)
         self.assertEqual(User.objects.count(), 1)
+
+
+class PostUpdateFormTest(TestCase):
+
+    def test_save(self):
+        user_instance = get_user_model().objects.create_user(username='asdf', password='asdf')
+        post_instance = Post.objects.create(title='Cats', author=user_instance)
+        form = PostUpdateForm({'text': 'This is a test'})
+        self.assertTrue(form.is_valid())
+        edition = form.save(post_instance = post_instance)
+
+        self.assertEqual(Edition.objects.count(), 1)
+        self.assertTrue(edition)

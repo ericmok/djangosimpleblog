@@ -22,3 +22,13 @@ class PostCreationForm(forms.Form):
         author = self.request.user
         text = self.cleaned_data['text']
         return Post.objects.create_with_edition(title=title, author=author, text=text)
+
+
+class PostUpdateForm(forms.Form):
+    text = forms.CharField(max_length=16383)
+
+    def save(self, post_instance):
+        text = self.cleaned_data['text']
+        return Edition.objects.create(post=post_instance, text=text)
+
+        
