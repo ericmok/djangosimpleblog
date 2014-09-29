@@ -13,11 +13,11 @@ class PostViews(TestCase):
     def setUp(self):
         self.client = Client()
 
-    def test_post_create_get_request(self):
+    def test_GET_post_create(self):
         response = self.client.get(reverse('posts-create'))
         self.assertEqual(response.status_code, 200)
 
-    def test_post_create_post_request(self):
+    def test_POST_post_create(self):
         new_user = get_user_model().objects.create_user(username='asdf', password='asdf')
         self.client.login(username='asdf', password='asdf')
         response = self.client.post(reverse('posts-create'), data={
@@ -27,7 +27,7 @@ class PostViews(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(Post.objects.count(), 1)
 
-    def test_post_detail_get_request(self):
+    def test_GET_post_detail(self):
         user = User.objects.create_user(username='asdf', password='asdf')
         new_post = Post.objects.create_with_edition(title='test', author=user, text='This is a test.')
         
@@ -40,7 +40,7 @@ class PostViews(TestCase):
         response = self.client.get(reverse('posts-detail', kwargs={'slug': '0test'}))
         self.assertEqual(response.status_code, 200)        
 
-    def test_post_detail_get_request_on_not_found(self):
+    def test_GET_post_detail_on_not_found(self):
         user = User.objects.create_user(username='asdf', password='asdf')
         new_post = Post.objects.create_with_edition(title='test', author=user, text='This is a test.')
         
