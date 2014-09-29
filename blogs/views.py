@@ -16,7 +16,7 @@ class PostCreationView(View):
     template_name = 'blogs/posts_create.html'
 
     def get(self, request, *args, **kwargs):
-        form = PostModelForm()
+        form = PostCreationForm()
         return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
