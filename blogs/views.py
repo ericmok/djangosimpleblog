@@ -37,7 +37,7 @@ class PostDetailView(View):
         slug = kwargs['slug']
         if slug:
             try:
-                post = Post.objects.get(slug=slug)
+                post = Post.objects.select_related('editions').get(slug=slug)
                 context = {
                     'post': post
                 }
