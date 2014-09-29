@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 from django.views.generic import View
 from django.contrib.auth.decorators import login_required
@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse_lazy, reverse
 
 from braces.views import LoginRequiredMixin
 
-from .forms import PostModelForm, PostCreationForm
+from .forms import PostModelForm, PostCreationForm, PostUpdateForm
 from .models import Post, Edition
 
 
@@ -42,5 +42,20 @@ class PostDetailView(View):
                 return render(request, self.template_name, context)
             except Post.DoesNotExist:
                 raise Http404
+        else:
+            raise Http404
+
+
+class PostUpdateView(View):
+    template_name = 'blogs/posts_update.html'
+    form_class = PostUpdateForm    
+
+    def get(self, request, *args, **kwargs):
+        slug = kwargs.get('slug', None)
+        if slug:
+            post = get_object_or_404(Post, slug=slug)
+            form = self.form_class()
+            context = {'post': post, 'form': form}
+            return render(request, self.template_name, context)
         else:
             raise Http404
