@@ -10,7 +10,7 @@ class AbstractDateModel(models.Model):
 
     class Meta:
         abstract = True
-        ordering = ['modified_at']
+        ordering = ['-modified_at']
 
 
 class PostManager(models.Manager):

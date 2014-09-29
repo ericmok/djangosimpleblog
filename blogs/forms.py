@@ -29,6 +29,5 @@ class PostUpdateForm(forms.Form):
 
     def save(self, post_instance):
         text = self.cleaned_data['text']
-        return Edition.objects.create(post=post_instance, text=text)
-
-        
+        new_edition = Edition.objects.create(post=post_instance, text=text)
+        return post_instance

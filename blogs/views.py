@@ -59,3 +59,18 @@ class PostUpdateView(View):
             return render(request, self.template_name, context)
         else:
             raise Http404
+
+    def post(self, request, *args, **kwargs):
+        slug = kwargs.get('slug', None)
+        if slug:
+            post = get_object_or_404(Post, slug=slug)
+            form = self.form_class(request.POST)
+            context = {'post': post, 'form': form}
+
+            if form.is_valid():
+                form.save(post_instance=post)
+                return redirect(reverse('posts-detail', kwargs={'slug': post.slug}))
+            else:
+                return render(request, self.template_name, context)
+        else:
+            raise Http404
