@@ -53,6 +53,14 @@ class PostViews(TestCase):
         response = self.client.get(reverse('posts-detail', kwargs={'slug': 'testasdf'}))
         self.assertEqual(response.status_code, 404)
 
+    def test_GET_post_list(self):
+        user = User.objects.create_user(username='asdf', password='asdf')
+        new_post = Post.objects.create_with_edition(title='another test', author=user, text='This is a test.')
+        
+        response = self.client.get(reverse('posts-list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'another test')
+
     def test_GET_post_update(self):
         user = User.objects.create_user(username='asdf', password='asdf')
         new_post = Post.objects.create_with_edition(title='Another', author=user, text='This is a test.')

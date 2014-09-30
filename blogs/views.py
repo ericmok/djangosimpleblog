@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
-from django.views.generic import View
+from django.views.generic import View, ListView
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.core.urlresolvers import reverse_lazy, reverse
@@ -28,6 +28,12 @@ class PostCreationView(LoginRequiredMixin, View):
         else:
             return render(request, self.template_name, {'form': form})
 
+
+class PostListView(ListView):
+    model = Post
+    context_object_name = 'posts'
+    template_name = 'blogs/posts_list.html'
+        
 
 class PostDetailView(View):
     template_name = 'blogs/posts_detail.html'
