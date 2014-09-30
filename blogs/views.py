@@ -47,9 +47,10 @@ class PostDetailView(View):
             raise Http404
 
 
-class PostUpdateView(View):
+class PostUpdateView(LoginRequiredMixin, View):
     template_name = 'blogs/posts_update.html'
-    form_class = PostUpdateForm    
+    form_class = PostUpdateForm
+    login_url = reverse_lazy('users-signin')
 
     def get(self, request, *args, **kwargs):
         slug = kwargs.get('slug', None)

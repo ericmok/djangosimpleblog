@@ -57,10 +57,21 @@ class PostViews(TestCase):
         user = User.objects.create_user(username='asdf', password='asdf')
         new_post = Post.objects.create_with_edition(title='Another', author=user, text='This is a test.')
 
+        self.client.login(username='asdf', password='asdf')
         response = self.client.get(reverse('posts-update', kwargs={'slug': new_post.slug}))
         self.assertEqual(response.status_code, 200)
         self.assertIsNotNone(response.context.get('form', None))
         self.assertIsNotNone(response.context.get('post', None))
+
+    def test_GET_post_update_401(self):
+        user = User.objects.create_user(username='asdf', password='asdf')
+        new_post = Post.objects.create_with_edition(title='Another', author=user, text='This is a test.')
+
+        response = self.client.get(reverse('posts-update', kwargs={'slug': new_post.slug}))
+        self.assertEqual(response.status_code, 302)
+
+        response = self.client.get(reverse('posts-update', kwargs={'slug': new_post.slug}), follow=True)
+        self.assertEqual(response.status_code, 200)
 
     def test_POST_post_update_view(self):
         user = User.objects.create_user(username='asdf', password='asdf')
