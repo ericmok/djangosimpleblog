@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
-from django.views.generic import View, ListView
+from django.views.generic import View, ListView, DetailView
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.core.urlresolvers import reverse_lazy, reverse
@@ -35,21 +35,17 @@ class PostListView(ListView):
     template_name = 'blogs/posts_list.html'
         
 
-class PostDetailView(View):
+class PostDetailView(DetailView):
     template_name = 'blogs/posts_detail.html'
+    context_object_name = 'post'
+    model = Post
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
 
-    def get(self, request, *args, **kwargs):
-        slug = kwargs['slug']
-        if slug:
-            try:
-                post = Post.objects.select_related('editions').get(slug=slug)
-                context = {
-                    'post': post
-                }
-                return render(request, self.template_name, context)
-            except Post.DoesNotExist:
-                raise Http404
-        else:
+    def get_object(self):
+        try:
+            return self.model.objects.select_related('editions').get(slug=self.kwargs[self.slug_field])
+        except Post.DoesNotExist:
             raise Http404
 
 
