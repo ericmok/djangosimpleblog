@@ -1,8 +1,16 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>{% block title %}Blog{% endblock %}</title>
+
+    <script src="{% static 'djangoblog/bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'djangoblog/bower_components/foundation/js/foundation.min.js' %}"></script>
+    <script src="{% static 'djangoblog/js/app.js' %}"></script>
     
+    <link rel="stylesheet" href="{% static 'djangoblog/stylesheets/app.css' %}" />
+
     {% block head %}
     {% endblock %}
 </head>

@@ -1,23 +1,46 @@
 {% extends "layout.html" %}
 
+{% load staticfiles %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'djangoblog/stylesheets/users/sign_in.css' %}" />
+{% endblock %}
+
 {% block content %}
-    {% if form.errors %}
-        <p> Your username and password didn't match. Please try again.</p>
-    {% endif %}
-
-    <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
-        {% csrf_token %}
-
-        <div>
-            {{ form.username.label_tag }}
-            {{ form.username }}
+<div class="content-wrapper">
+    <div class="arc-bg">
+        <img data-interchange="[{% static 'djangoblog/images/arc.jpg' %}, (default)]" class="" />
+        <div class="bg-filter"></div>
+    </div>
+    <div class="text-center">
+            {% if form.errors %}
+                <div class="panel">
+                    <p> Your username and password didn't match. Please try again.</p>
+                </div>
+            {% endif %}
+        <div class="center-box">
+            
+            <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="small-12">
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-12">
+                        {{ form.password.label_tag }}
+                        {{ form.password }}
+                    </div>
+                </div>
+                <div>                
+                    <input class="binary-choice button round" type="submit" value="Sign In" />
+                    <a class="binary-choice button round secondary" href="{% url 'users-signin' %}">Register</a>
+                </div>
+                <input type="hidden" name="next" value="{{ next }}" />
+            </form>
         </div>
-        <div>
-            {{ form.password.label_tag }}
-            {{ form.password }}
-        </div>
-
-        <input type="submit" value="Sign In" />
-        <input type="hidden" name="next" value="{{ next }}" />
-    </form>
+    </div>
+</div>
 {% endblock %}
