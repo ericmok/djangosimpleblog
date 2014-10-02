@@ -59,6 +59,7 @@ class PostUpdateView(UserPassesTestMixin, View):
     raise_exception = True
 
     def dispatch(self, request, *args, **kwargs):
+        # See: https://github.com/brack3t/django-braces/issues/88
         if not request.user.is_authenticated():
             # Redirect
             return redirect_to_login(request.get_full_path(),
