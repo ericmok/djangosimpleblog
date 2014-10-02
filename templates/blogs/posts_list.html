@@ -1,12 +1,13 @@
-<h1>List of posts</h1>
+{% extends "layout.html" %}
 
-POSTS: {{ posts }}
-{% for post in posts %}
-    <h3>{{ post.title }}</h3>
-    <h4>{{ post.author.username }}</h4>
-    {% for edition in post.editions.all %}
-        <div>
-            {{ edition }}
+{% block content %}
+    {% for post in posts %}
+        <div class="panel">
+            <h3><a href="{% url 'posts-detail' post.slug %}">{{ post.title }}</a></h3>
+            <address>{{ post.author.username }}</address>
+            <p>
+                {{post.editions.first.text}}
+            </p>
         </div>
     {% endfor %}
-{% endfor %}
+{% endblock %}
