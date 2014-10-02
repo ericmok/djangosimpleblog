@@ -4,8 +4,9 @@ from django.views.generic import View, ListView, DetailView
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.core.urlresolvers import reverse_lazy, reverse
+from django.contrib.auth.views import redirect_to_login
 
-from braces.views import LoginRequiredMixin
+from braces.views import LoginRequiredMixin, UserPassesTestMixin
 
 from .forms import PostModelForm, PostCreationForm, PostUpdateForm
 from .models import Post, Edition
@@ -49,10 +50,33 @@ class PostDetailView(DetailView):
             raise Http404
 
 
-class PostUpdateView(LoginRequiredMixin, View):
+class PostUpdateView(UserPassesTestMixin, View):
     template_name = 'blogs/posts_update.html'
     form_class = PostUpdateForm
     login_url = reverse_lazy('users-signin')
+
+    # Raise exception if test func fails
+    raise_exception = True
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated():
+            # Redirect
+            return redirect_to_login(request.get_full_path(),
+                                     self.get_login_url(),
+                                     self.get_redirect_field_name())
+        return super(PostUpdateView, self).dispatch(request, *args, **kwargs)
+
+    def test_func(self, user):
+        slug = self.kwargs.get('slug', None)
+
+        if slug:
+            post = get_object_or_404(Post, slug=slug)
+            if post.author == user:
+                return True
+            else:
+                return False
+        else:
+            raise Http404
 
     def get(self, request, *args, **kwargs):
         slug = kwargs.get('slug', None)

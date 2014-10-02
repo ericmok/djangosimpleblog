@@ -71,15 +71,31 @@ class PostViews(TestCase):
         self.assertIsNotNone(response.context.get('form', None))
         self.assertIsNotNone(response.context.get('post', None))
 
-    def test_GET_post_update_401(self):
+    def test_GET_post_update_with_no_login(self):
+        """
+        Unauthorized 
+        """
         user = User.objects.create_user(username='asdf', password='asdf')
         new_post = Post.objects.create_with_edition(title='Another', author=user, text='This is a test.')
 
         response = self.client.get(reverse('posts-update', kwargs={'slug': new_post.slug}))
+        # 401 is tricky
         self.assertEqual(response.status_code, 302)
 
         response = self.client.get(reverse('posts-update', kwargs={'slug': new_post.slug}), follow=True)
         self.assertEqual(response.status_code, 200)
+
+    def test_GET_post_update_raise_403_if_wrong_user(self):
+        user = User.objects.create_user(username='asdf', password='asdf')
+        bad_user = User.objects.create_user(username='bunny', password='asdf')
+
+        new_post = Post.objects.create_with_edition(title='Another', author=user, text='This is a test.')
+
+        self.client.login(username='bunny', password='asdf')
+        data = {'text': 'Changed'}
+        response = self.client.post(reverse('posts-update', kwargs={'slug': new_post.slug}), data)
+        self.assertEqual(response.status_code, 403)
+        self.assertEqual(new_post.editions.first().text, 'This is a test.')
 
     def test_POST_post_update_view(self):
         user = User.objects.create_user(username='asdf', password='asdf')
