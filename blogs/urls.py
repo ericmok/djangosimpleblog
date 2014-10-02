@@ -5,7 +5,7 @@ from blogs.views import PostCreationView, PostDetailView, PostUpdateView, PostLi
 
 urlpatterns = patterns('',
     url(r'^new/?$', PostCreationView.as_view(), name='posts-create'),
-    url(r'^posts/?$', PostListView.as_view(), name='posts-list'),
-    url(r'^posts/(?P<slug>.*?)/?$', PostDetailView.as_view(), name='posts-detail'),
+    url(r'^/?$', PostListView.as_view(), name='posts-list'),
+    url(r'^post/(?P<slug>.*?)/?$', PostDetailView.as_view(), name='posts-detail'),
     url(r'^update/(?P<slug>.*?)/?$', PostUpdateView.as_view(), name='posts-update'),
 )
