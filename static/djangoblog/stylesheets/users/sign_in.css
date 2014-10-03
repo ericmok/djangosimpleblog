@@ -1,0 +1,92 @@
+/* line 3, ../../scss/users/sign_in.scss */
+.content-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* line 13, ../../scss/users/sign_in.scss */
+.center-box {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 2em;
+  width: 30em;
+  height: 18em;
+  border: solid 1px #CCC;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.9);
+  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px;
+}
+
+/* line 35, ../../scss/users/sign_in.scss */
+.bg-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+/* line 46, ../../scss/users/sign_in.scss */
+.bg-wrapper img {
+  width: 100%;
+}
+
+@-moz-keyframes dark-breathing-anim {
+  /* line 54, ../../scss/users/sign_in.scss */
+  0% {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  /* line 58, ../../scss/users/sign_in.scss */
+  100% {
+    background: rgba(0, 0, 0, 0.6);
+  }
+}
+@-webkit-keyframes dark-breathing-anim {
+  /* line 54, ../../scss/users/sign_in.scss */
+  0% {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  /* line 58, ../../scss/users/sign_in.scss */
+  100% {
+    background: rgba(0, 0, 0, 0.6);
+  }
+}
+@keyframes dark-breathing-anim {
+  /* line 54, ../../scss/users/sign_in.scss */
+  0% {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  /* line 58, ../../scss/users/sign_in.scss */
+  100% {
+    background: rgba(0, 0, 0, 0.6);
+  }
+}
+/* line 64, ../../scss/users/sign_in.scss */
+.bg-filter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  -moz-animation: dark-breathing-anim 1s ease;
+  -webkit-animation: dark-breathing-anim 1s ease;
+  animation: dark-breathing-anim 1s ease;
+}
+
+/* line 78, ../../scss/users/sign_in.scss */
+.header-form-errors {
+  padding: 2rem;
+  background: rgba(240, 200, 200, 0.8);
+}
