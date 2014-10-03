@@ -55,7 +55,7 @@ html, body {
 /* line 392, ../bower_components/foundation/scss/foundation/components/_global.scss */
 html,
 body {
-  font-size: 100%;
+  font-size: 16px;
 }
 
 /* line 396, ../bower_components/foundation/scss/foundation/components/_global.scss */
@@ -67,7 +67,7 @@ body {
   font-family: "Times New Roman", serif;
   font-weight: normal;
   font-style: normal;
-  line-height: 1.5;
+  line-height: 24px;
   position: relative;
   cursor: auto;
 }
@@ -9024,10 +9024,11 @@ th.hide-for-touch {
 }
 /* line 1, ../scss/_layout.scss */
 .main-header {
-  padding: 2rem;
+  margin-top: 2.25em;
+  margin-bottom: 1.5em;
 }
 
-/* line 6, ../scss/_layout.scss */
+/* line 8, ../scss/_layout.scss */
 .main-nav {
   width: 100%;
   padding: 0.1rem 2rem;
@@ -9051,4 +9052,10 @@ article {
 /* line 16, ../scss/_modules.scss */
 .sidebar:hover {
   opacity: 1;
+}
+
+/* line 106, ../../../../../../../.rvm/gems/ruby-2.1.0/gems/compass-core-1.0.1/stylesheets/compass/typography/_vertical_rhythm.scss */
+html {
+  font-size: 100%;
+  line-height: 1.5em;
 }

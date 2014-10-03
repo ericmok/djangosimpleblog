@@ -64,9 +64,11 @@
 // If you want your base font-size to be different and not have it affect the grid breakpoints,
 // set $rem-base to $base-font-size and make sure $base-font-size is a px value.
 // $base-font-size: 100%;
+$base-font-size: 16px;
 
 // The $base-font-size is 100% while $base-line-height is 150%
 // $base-line-height: 150%;
+$base-line-height: 24px;
 
 // We use this to control whether or not CSS classes come through in the gem files.
 $include-html-classes: true;

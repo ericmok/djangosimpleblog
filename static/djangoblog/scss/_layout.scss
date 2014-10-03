@@ -1,6 +1,8 @@
 .main-header
 {
-    padding: 2rem;
+    //padding: 2rem;
+    @include leader(1.5);
+    @include trailer(1);
 }
 
 .main-nav

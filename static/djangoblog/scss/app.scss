@@ -5,6 +5,8 @@
 @import "layout";
 @import "modules";
 
+@include establish-baseline;
+
 // Or selectively include components
 // @import
 //   "foundation/components/accordion",
