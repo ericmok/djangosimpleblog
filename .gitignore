@@ -20,7 +20,7 @@ pip-log.txt
 node_modules/
 
 
-/bower_components/*
-/.sass-cache/*
+bower_components/*
+.sass-cache/*
 *.DS_Store
-/stylesheets/*
+stylesheets/*
