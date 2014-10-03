@@ -43,6 +43,11 @@ class PostDetailView(DetailView):
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
 
+    def get_context_data(self, **kwargs):
+        context = super(PostDetailView, self).get_context_data(**kwargs)
+        context['posts'] = self.model.objects.all()
+        return context
+
     def get_object(self):
         try:
             return self.model.objects.select_related('editions').get(slug=self.kwargs[self.slug_field])
