@@ -19,4 +19,8 @@ pip-log.txt
 # npm
 node_modules/
 
-.sass-cache
+
+/bower_components/*
+/.sass-cache/*
+*.DS_Store
+/stylesheets/*
