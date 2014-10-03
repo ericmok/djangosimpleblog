@@ -8,14 +8,10 @@
 
 {% block fullcontent %}
 <div class="content-wrapper">
-    <div class="arc-bg">
-        <img data-interchange="[{% static 'djangoblog/images/arc.jpg' %}, (default)]" class="" />
-        <div class="bg-filter"></div>
-    </div>
     <div class="text-center">
             {% if form.errors %}
-                <div class="alert-box alert">
-                    <p><strong> Your username and password didn't match. Please try again. </strong></p>
+                <div class="header-form-errors">
+                    <h4>Your username and password didn't match. Please try again.</h4>
                 </div>
             {% endif %}
         <div class="center-box">
@@ -41,6 +37,10 @@
                 <input type="hidden" name="next" value="{{ next }}" />
             </form>
         </div>
+    </div>
+    <div class="bg-wrapper">
+        <img data-interchange="[{% static 'djangoblog/images/arc.jpg' %}, (default)]" class="" />
+        <div class="bg-filter"></div>
     </div>
 </div>
 {% endblock %}
