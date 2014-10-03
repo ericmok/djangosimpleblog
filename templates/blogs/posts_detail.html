@@ -14,6 +14,7 @@
         <h4><address>{{post.author.username}}</address></h4>
         {% for edition in post.editions.all %}
             <div>
+                <p>{{post.editions.first.created_at}}</p>
                 <p>
                     {{ edition.text }}
                 </p>
@@ -21,7 +22,11 @@
         {% endfor %}
     </article>
 </div>
-<div class="small-12 medium-4 large-4 columns">
-    TEST
+<div class="small-12 medium-4 large-4 columns sidebar">
+    <ul>
+    {% for article in posts %}
+        <li><a href="{% url 'posts-detail' article.slug %}">{{ article.title }}</a></li>
+    {% endfor %}
+    </ul>
 </div>
 {% endblock %}

@@ -2,7 +2,7 @@
 
 {% block content %}
     {% for post in posts %}
-        <div class="panel">
+        <div class="">
             <h3><a href="{% url 'posts-detail' post.slug %}">{{ post.title }}</a></h3>
             <address>{{ post.author.username }}</address>
             <p>

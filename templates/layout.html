@@ -16,8 +16,14 @@
 </head>
 <body>
     <section>
+        {% block fullcontent %}
+        <nav class="main-nav">
+            <div class="text-right">
+                <a href="{% url 'users-signin' %}">Sign In</a>
+            </div>
+        </nav>
         <header class="main-header text-center">
-            <h3>Eric's Blog</h3>
+            <h1>words</h1>
         </header>
         <div class="main-content">
             {% block content %}
@@ -25,6 +31,7 @@
         </div>
         <footer>
         </footer>
+        {% endblock %}
     </section>
 </body>
 </html>
