@@ -3887,7 +3887,7 @@ form .row textarea.columns {
 /* Label Styles */
 /* line 373, ../bower_components/foundation/scss/foundation/components/_forms.scss */
 label {
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   color: #4d4d4d;
   cursor: pointer;
   display: block;
@@ -3931,7 +3931,7 @@ select::-ms-expand {
   border-style: solid;
   border-width: 1px;
   overflow: hidden;
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   height: 2.3125rem;
   line-height: 2.3125rem;
 }
@@ -9084,12 +9084,11 @@ article {
 /* line 45, ../scss/_modules.scss */
 .errorlist {
   list-style-type: none;
-  margin: 0 0 1rem 0;
-  padding: 1rem;
+  margin: 0.1rem 0 0 0;
+  padding: 0;
   border: solid 1px #EEE;
   border-radius: 4px;
-  background: #F44;
-  color: #FFF;
+  color: #F22;
   font-size: 19px;
   font-family: Helvetica, Arial, sans-serif;
 }

@@ -6,6 +6,7 @@ from users.forms import RegisterForm
 
 
 class RegisterView(FormView):
+    template_name = 'users/register.html'
     form_class = RegisterForm
     success_url = reverse_lazy('posts-list')
 

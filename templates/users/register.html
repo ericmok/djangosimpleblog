@@ -13,18 +13,27 @@
             <form action="{% url 'users-register' %}" method="POST">
                 {% csrf_token %}
                 <div>
+                    {{ form.errors.username }}
                     {{ form.username.label_tag }}
                 </div>
                 <div>
                     {{ form.username }}
                 </div>
                 <div>
+                    {{ form.email.label_tag }} (Optional)
+                </div>
+                <div>
+                    {{ form.email }}
+                </div>
+                <div>
+                    {{ form.errors.password1 }}
                     {{ form.password1.label_tag }}
                 </div>
                 <div>
                     {{ form.password1 }}
                 </div>
                 <div>
+                    {{ form.errors.password2 }}
                     {{ form.password2.label_tag }}
                 </div>
                 <div>
