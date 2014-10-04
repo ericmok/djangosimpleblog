@@ -11,7 +11,7 @@ class PostModelForm(forms.ModelForm):
 
 class PostCreationForm(forms.Form):
     title = forms.CharField(max_length=255)
-    text = forms.CharField(max_length=16383)
+    text = forms.CharField(max_length=16383, widget=forms.Textarea)
 
     def __init__(self, request=None, *args, **kwargs):
         self.request = request
@@ -25,7 +25,7 @@ class PostCreationForm(forms.Form):
 
 
 class PostUpdateForm(forms.Form):
-    text = forms.CharField(max_length=16383)
+    text = forms.CharField(max_length=16383, widget=forms.Textarea)
 
     def save(self, post_instance):
         text = self.cleaned_data['text']
