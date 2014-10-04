@@ -27,7 +27,12 @@ class PostCreationForm(forms.Form):
 class PostUpdateForm(forms.Form):
     text = forms.CharField(max_length=16383, widget=forms.Textarea)
 
-    def save(self, post_instance):
+    def __init__(self, *args, **kwargs):
+        self.instance = kwargs.pop('instance', None)
+        super(PostUpdateForm, self).__init__(*args, **kwargs)
+
+    def save(self, instance=None):
+        post_instance = instance or self.instance
         text = self.cleaned_data['text']
         new_edition = Edition.objects.create(post=post_instance, text=text)
         return post_instance

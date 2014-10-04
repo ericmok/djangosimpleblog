@@ -90,7 +90,7 @@ class PostUpdateView(UserPassesTestMixin, View):
         slug = kwargs.get('slug', None)
         if slug:
             post = get_object_or_404(Post, slug=slug)
-            form = self.form_class()
+            form = self.form_class(instance=post)
             context = {'post': post, 'form': form}
             return render(request, self.template_name, context)
         else:
@@ -104,7 +104,7 @@ class PostUpdateView(UserPassesTestMixin, View):
             context = {'post': post, 'form': form}
 
             if form.is_valid():
-                form.save(post_instance=post)
+                form.save(instance=post)
                 return redirect(reverse('posts-detail', kwargs={'slug': post.slug}))
             else:
                 return render(request, self.template_name, context)
