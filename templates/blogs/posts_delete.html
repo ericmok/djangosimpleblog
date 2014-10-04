@@ -5,10 +5,16 @@
 {% endblock %}
 
 {% block fullcontent %}
-    <h1>Are you sure you want to delete the post: {{ object.title }}?</h1>
+    <br/>
+    <div class="row">
+        <div class="small-12 medium-7 small-centered columns text-center">
+            <h3>Are you sure you want to delete the post <strong>{{ object.title }}</strong>?</h3>
 
-    <form method="POST" action="?">
-        {% csrf_token %}
-        <input type="submit" value="Delete" />
-    </form>
+            <form method="POST" action="?">
+                {% csrf_token %}
+                <a class="button radius disabled" href="{% url 'posts-detail' object.slug %}">Cancel</a>
+                <input class="button radius alert" type="submit" value="Delete" />
+            </form>
+        </div>
+    </div>
 {% endblock %}

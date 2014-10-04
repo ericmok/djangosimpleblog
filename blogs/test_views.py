@@ -127,11 +127,13 @@ class PostViews(TestCase):
     def test_POST_delete_post_view(self):
         user = User.objects.create_user(username='asdf', password='asdf')
         new_post = Post.objects.create_with_edition(title='Another', author=user, text='This is a test.')
-
+        new_edition = Edition.objects.create(post=new_post, text='blah')
+        
         self.client.login(username='asdf', password='asdf')
         response = self.client.post(reverse('posts-delete', kwargs={'slug': new_post.slug}))
         self.assertEqual(response.status_code, 302)
         self.assertEqual(Post.objects.count(), 0)
+        self.assertEqual(Edition.objects.count(), 0)
 
     def test_delete_post_no_slug(self):
         user = User.objects.create_user(username='asdf', password='asdf')

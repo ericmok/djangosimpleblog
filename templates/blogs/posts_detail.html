@@ -8,9 +8,11 @@
 {% endblock %}
 
 {% block corneractions %}
-<br/>
     {% if post.author == user %}
+        <br/>
         <a class="button small round info" href="{% url 'posts-update' post.slug %}">Update Post</a>
+        <br/>
+        <a class="button small radius alert" href="{% url 'posts-delete' post.slug %}">Delete Post</a>
     {% endif %}
 {% endblock %}
 
