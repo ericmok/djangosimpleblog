@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.core.urlresolvers import reverse_lazy
+from django.shortcuts import render, redirect
+from django.core.urlresolvers import reverse_lazy, reverse
 from django.views.generic.edit import FormView
 
 from users.forms import RegisterForm
@@ -12,4 +12,5 @@ class RegisterView(FormView):
 
     def form_valid(self, form):
         form.save()
+        return redirect('/')
         return super(RegisterView, self).form_valid(form)

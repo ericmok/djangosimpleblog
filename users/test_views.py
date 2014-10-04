@@ -4,6 +4,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth import SESSION_KEY
 
+from django.utils.six.moves.urllib.parse import urlparse
+
 from users.models import User
 
 
@@ -24,6 +26,18 @@ class RegisterTestCase(TestCase):
                                           'password2':'blah'})
         self.assertEqual(response.status_code, 302)
         self.assertEqual(User.objects.count(), 1)
+
+    def test_redirects_on_success(self):
+        self.assertEqual(User.objects.count(), 0)
+        response = self.client.post(reverse('users-register'), 
+                                    data={'username':'blah', 
+                                          'password1':'blah',
+                                          'password2':'blah'}, follow=True)
+        self.assertEqual(response.status_code, 200)
+        scheme, netloc, path, params, query, fragment = urlparse(response.redirect_chain[0][0])
+        self.assertEqual(path, '/')
+        self.assertEqual(User.objects.count(), 1)
+
 
 class SignInCase(TestCase):
 
