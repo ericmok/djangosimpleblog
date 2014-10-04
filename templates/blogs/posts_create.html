@@ -1,10 +1,14 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <h1>Create a post</h1>
-    <form method="POST" action="">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Create Post" />
-    </form>
+<div class="row">
+    <div class="small-12 medium-9 columns">
+        <h1>Create a post</h1>
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="button round" type="submit" value="Create Post" />
+        </form>
+    </div>
+</div>
 {% endblock %}
