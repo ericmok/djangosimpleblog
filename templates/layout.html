@@ -32,6 +32,8 @@
                     {% if user.is_authenticated %}
                         <a class="button small round success" href="{% url 'posts-create' %}">Create a post</a>
                     {% endif %}
+                    {% block corneractions %}
+                    {% endblock %}
                 </div>
             </div>            
         </nav>
