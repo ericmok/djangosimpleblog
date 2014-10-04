@@ -52,7 +52,8 @@ class Post(AbstractDateModel):
 
     def save(self, **kwargs):
         with transaction.atomic():
-            self.generate_unique_slug()
+            if not self.pk:
+                self.generate_unique_slug()
             super(Post, self).save(**kwargs)
 
 

@@ -41,3 +41,13 @@ class PostTests(TestCase):
         post.generate_unique_slug()
         post.save()
         self.assertEqual(post.slug, '1test-title')
+
+    def test_doesnt_regenerate_slug_if_same_title(self):
+        test_title = 'Test title'
+        post = Post(title=test_title, author=self.new_user)
+        post.generate_unique_slug()
+        post.save()
+        self.assertEqual(post.slug, 'test-title')
+        
+        post.save()
+        self.assertEqual(post.slug, 'test-title')
