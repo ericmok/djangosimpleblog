@@ -7,7 +7,7 @@ from users.forms import RegisterForm
 
 class RegisterView(FormView):
     form_class = RegisterForm
-    success_url = reverse_lazy('users-register')
+    success_url = reverse_lazy('posts-list')
 
     def form_valid(self, form):
         form.save()
