@@ -4,6 +4,7 @@ from django.conf import settings
 from django.template.defaultfilters import slugify
 
 import markdown
+import bleach
 
 
 class AbstractDateModel(models.Model):
@@ -61,9 +62,6 @@ class Edition(AbstractDateModel):
 
     def get_text(self):
         return self.text
-
-    def get_markdown(self):
-        return markdown.markdown(self.text)
 
 
 class Tag(models.Model):
