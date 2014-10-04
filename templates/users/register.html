@@ -1,10 +1,37 @@
 {% extends "layout.html" %}
 
+{% load staticfiles %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'djangoblog/stylesheets/users/register.css' %}" />
+{% endblock %}
+
 {% block content %}
-    <h1>Register user</h1>
-    <form action="{% url 'users-register' %}" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Register" />
-    </form>
+    <div class="row">
+        <div class="small-12 medium-6 small-centered columns">
+            <h2>Sign up to start posting!</h2>
+            <form action="{% url 'users-register' %}" method="POST">
+                {% csrf_token %}
+                <div>
+                    {{ form.username.label_tag }}
+                </div>
+                <div>
+                    {{ form.username }}
+                </div>
+                <div>
+                    {{ form.password1.label_tag }}
+                </div>
+                <div>
+                    {{ form.password1 }}
+                </div>
+                <div>
+                    {{ form.password2.label_tag }}
+                </div>
+                <div>
+                    {{ form.password2 }}
+                </div>
+                <input type="submit" value="Register" class="button round" />
+            </form>
+        </div>
+    </div>
 {% endblock %}

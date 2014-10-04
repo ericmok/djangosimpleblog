@@ -9081,6 +9081,19 @@ article {
   box-shadow: 0px 1px 3px -1px #888888;
 }
 
+/* line 45, ../scss/_modules.scss */
+.errorlist {
+  list-style-type: none;
+  margin: 0 0 1rem 0;
+  padding: 1rem;
+  border: solid 1px #EEE;
+  border-radius: 4px;
+  background: #F44;
+  color: #FFF;
+  font-size: 19px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
 /* line 106, ../../../../../../../.rvm/gems/ruby-2.1.0/gems/compass-core-1.0.1/stylesheets/compass/typography/_vertical_rhythm.scss */
 html {
   font-size: 100%;
