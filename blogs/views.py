@@ -35,7 +35,7 @@ class PostListView(ListView):
     model = Post
     context_object_name = 'posts'
     template_name = 'blogs/posts_list.html'
-    paginate_by = 32
+    paginate_by = 24
 
 
 class PostDetailView(DetailView):
@@ -47,7 +47,7 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(PostDetailView, self).get_context_data(**kwargs)
-        context['posts'] = self.model.objects.all()[:24]
+        context['posts'] = self.model.objects.all()[:16]
         return context
 
     def get_object(self):
