@@ -9047,7 +9047,7 @@ article {
 
 /* line 8, ../scss/_modules.scss */
 .sidebar {
-  position: fixed;
+  position: relative;
   right: 2rem;
   opacity: 0.5;
   -moz-transition: all 1s ease;

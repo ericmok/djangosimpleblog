@@ -45,7 +45,7 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(PostDetailView, self).get_context_data(**kwargs)
-        context['posts'] = self.model.objects.all()
+        context['posts'] = self.model.objects.all()[:24]
         return context
 
     def get_object(self):

@@ -24,7 +24,7 @@
             <div>
                 <p>{{post.editions.first.created_at}}</p>
                 <p>
-                    {{ edition.text|present }}
+                    {{ edition.text|present|safe }}
                 </p>
             </div>
         {% endfor %}
