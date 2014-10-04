@@ -1,11 +1,15 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
-from templatetags.present import present
+from blogs.templatetags.present import present
 from blogs.models import Post, Edition
 
 
+User = get_user_model()
+
 class PresentTest(TestCase):
+    def setUp(self):
+        self.new_user = User.objects.create_user(username='asdf', password='asdf')
     def test_can_get_markdown(self):
         new_post = Post.objects.create_with_edition(title='test', author=self.new_user, text='#This is the post')
         self.assertEqual(Post.objects.count(), 1)
@@ -16,7 +20,7 @@ class PresentTest(TestCase):
         self.assertIn('<h1>', markdown_test)
 
     def test_markdown_takes_h1_and_img(self):
-        new_post = Post.objects.create_with_edition(title='test', author=self.new_user, text='#This is the post\n\n\nThis is a test\n\n\nAnother [here](cat.png)')
+        new_post = Post.objects.create_with_edition(title='test', author=self.new_user, text='#This is the post\n\n\nThis is a test\n\n\nAnother ![here](cat.png)')
         self.assertEqual(Post.objects.count(), 1)
         self.assertEqual(Edition.objects.count(), 1)
 
