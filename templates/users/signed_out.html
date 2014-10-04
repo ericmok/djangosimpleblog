@@ -1,1 +1,15 @@
-<h1>Signed out</h1>
+{% extends 'layout.html' %}
+
+{% block fullcontent %}
+    <div class="row">
+        <div class="small-12 medium-6 small-centered columns text-center">
+            <h1>Signed out</h1>
+            <h3>You'll be redirected in a few seconds</h3>
+            <script>
+                setTimeout(function() {
+                    window.location = '/';
+                }, 3000);
+            </script>
+        </div>
+    </div>
+{% endblock %}
