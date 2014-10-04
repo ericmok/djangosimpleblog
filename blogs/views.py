@@ -16,6 +16,7 @@ class PostCreationView(LoginRequiredMixin, View):
     form_class = PostModelForm
     login_url = reverse_lazy('users-signin')
     template_name = 'blogs/posts_create.html'
+    paginate_by = 2
 
     def get(self, request, *args, **kwargs):
         form = PostCreationForm()
@@ -34,7 +35,8 @@ class PostListView(ListView):
     model = Post
     context_object_name = 'posts'
     template_name = 'blogs/posts_list.html'
-        
+    paginate_by = 32
+
 
 class PostDetailView(DetailView):
     template_name = 'blogs/posts_detail.html'

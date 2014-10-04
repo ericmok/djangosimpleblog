@@ -4,6 +4,9 @@
 
 {% block content %}
     {% for post in posts %}
+    {{is_paginated}},
+    {{page_obj}},
+    {{paginator}}
     <div class="row">
         <div class="small-12 medium-8 medium-centered columns">
             <h3><a href="{% url 'posts-detail' post.slug %}">{{ post.title }}</a></h3>
