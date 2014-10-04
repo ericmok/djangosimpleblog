@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block fullcontent %}
+    <h1>Are you sure you want to delete the post: {{ object.title }}?</h1>
+
+    <form method="POST" action="?">
+        {% csrf_token %}
+        <input type="submit" value="Delete" />
+    </form>
+{% endblock %}

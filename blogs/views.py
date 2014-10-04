@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
-from django.views.generic import View, ListView, DetailView
+from django.views.generic import View, ListView, DetailView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.core.urlresolvers import reverse_lazy, reverse
@@ -110,3 +110,14 @@ class PostUpdateView(UserPassesTestMixin, View):
                 return render(request, self.template_name, context)
         else:
             raise Http404
+
+
+class PostDeleteView(UserPassesTestMixin, DeleteView):
+    model = Post
+    template_name = 'blogs/posts_delete.html'
+    success_url = reverse_lazy('posts-list')
+    login_url = reverse_lazy('users-signin')
+
+    def test_func(self, user):
+        post = self.get_object()
+        return post.author == user

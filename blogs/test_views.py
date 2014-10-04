@@ -114,3 +114,43 @@ class PostViews(TestCase):
         response = self.client.post(reverse('posts-update', kwargs={'slug': new_post.slug}), data)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(new_post.editions.first().text, 'Changed')
+
+    def test_GET_delete_post_view(self):
+        user = User.objects.create_user(username='asdf', password='asdf')
+        new_post = Post.objects.create_with_edition(title='Another', author=user, text='This is a test.')
+
+        self.client.login(username='asdf', password='asdf')
+        response = self.client.get(reverse('posts-delete', kwargs={'slug': new_post.slug}))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Post.objects.count(), 1)
+
+    def test_POST_delete_post_view(self):
+        user = User.objects.create_user(username='asdf', password='asdf')
+        new_post = Post.objects.create_with_edition(title='Another', author=user, text='This is a test.')
+
+        self.client.login(username='asdf', password='asdf')
+        response = self.client.post(reverse('posts-delete', kwargs={'slug': new_post.slug}))
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Post.objects.count(), 0)
+
+    def test_delete_post_no_slug(self):
+        user = User.objects.create_user(username='asdf', password='asdf')
+        new_post = Post.objects.create_with_edition(title='Another', author=user, text='This is a test.')
+
+        response = self.client.get(reverse('posts-delete', kwargs={'slug': ''}))
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(Post.objects.count(), 1)
+
+    def test_delete_post_no_credentials(self):
+        user = User.objects.create_user(username='asdf', password='asdf')
+        new_post = Post.objects.create_with_edition(title='Another', author=user, text='This is a test.')
+
+        # GET
+        response = self.client.get(reverse('posts-delete', kwargs={'slug': new_post.slug}))
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Post.objects.count(), 1)
+
+        # POST
+        response = self.client.post(reverse('posts-delete', kwargs={'slug': new_post.slug}))
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Post.objects.count(), 1)
