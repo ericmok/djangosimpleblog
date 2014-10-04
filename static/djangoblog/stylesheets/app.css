@@ -9023,13 +9023,19 @@ th.hide-for-touch {
   }
 }
 /* line 1, ../scss/_layout.scss */
-.main-header {
-  margin-top: 2.25em;
-  margin-bottom: 1.5em;
+body {
+  background: #F0F0F0;
 }
 
-/* line 8, ../scss/_layout.scss */
+/* line 6, ../scss/_layout.scss */
+.main-header {
+  margin-top: 2.7em;
+  margin-bottom: 1.8em;
+}
+
+/* line 13, ../scss/_layout.scss */
 .main-nav {
+  position: relative;
   width: 100%;
   padding: 0.1rem 2rem;
 }
@@ -9052,6 +9058,27 @@ article {
 /* line 16, ../scss/_modules.scss */
 .sidebar:hover {
   opacity: 1;
+}
+
+/* line 22, ../scss/_modules.scss */
+.logo {
+  color: #111;
+}
+/* line 26, ../scss/_modules.scss */
+.logo:hover {
+  color: #44F;
+}
+
+/* line 32, ../scss/_modules.scss */
+.corner-actions {
+  position: absolute;
+  top: 1rem;
+  right: 0.1rem;
+  padding: 1rem;
+  background: #FFF;
+  -moz-box-shadow: 0px 1px 3px -1px #888888;
+  -webkit-box-shadow: 0px 1px 3px -1px #888888;
+  box-shadow: 0px 1px 3px -1px #888888;
 }
 
 /* line 106, ../../../../../../../.rvm/gems/ruby-2.1.0/gems/compass-core-1.0.1/stylesheets/compass/typography/_vertical_rhythm.scss */

@@ -18,12 +18,18 @@
 
         {% block fullcontent %}
         <nav class="main-nav">
-            <div class="text-right">
-                <a href="{% url 'users-signin' %}">Sign In</a>
+            <div class="text-right corner-actions">
+                {% if user.is_authenticated %}
+                    Logged in as {{ user.username }}<br/>
+                    <a href="{% url 'users-signout' %}">Sign Out</a>
+                {% endif %}
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'users-signin' %}">Sign In</a>
+                {% endif %}
             </div>
         </nav>
         <header class="main-header text-center">
-            <h1>words</h1>
+            <a href="{% url 'posts-list' %}"><h1 class="logo">words</h1></a>
         </header>
         <div class="main-content">
             {% block content %}
