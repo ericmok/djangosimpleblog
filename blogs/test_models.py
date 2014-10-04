@@ -41,3 +41,11 @@ class PostTests(TestCase):
         post.generate_unique_slug()
         post.save()
         self.assertEqual(post.slug, '1test-title')
+
+    def test_can_get_markdown(self):
+        new_post = Post.objects.create_with_edition(title='test', author=self.new_user, text='#This is the post')
+        self.assertEqual(Post.objects.count(), 1)
+        self.assertEqual(Edition.objects.count(), 1)
+
+        markdown_test = Post.objects.get(id=new_post.id).editions.first().get_markdown()
+        self.assertIn('<h1>', markdown_test)

@@ -3,6 +3,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
 from django.template.defaultfilters import slugify
 
+import markdown
+
 
 class AbstractDateModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -59,6 +61,9 @@ class Edition(AbstractDateModel):
 
     def get_text(self):
         return self.text
+
+    def get_markdown(self):
+        return markdown.markdown(self.text)
 
 
 class Tag(models.Model):
