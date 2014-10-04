@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% load staticfiles %}
+{% load present %}
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'djangoblog/stylesheets/posts/posts_create.css' %}"></script>
@@ -23,7 +24,7 @@
             <div>
                 <p>{{post.editions.first.created_at}}</p>
                 <p>
-                    {{ edition.get_markdown|safe }}
+                    {{ edition.text|present }}
                 </p>
             </div>
         {% endfor %}
