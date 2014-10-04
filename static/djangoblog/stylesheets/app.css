@@ -9074,14 +9074,22 @@ article {
   position: absolute;
   top: 1rem;
   right: 0.1rem;
+  padding: 0.2rem;
+}
+/* line 40, ../scss/_modules.scss */
+.corner-actions .internal-corner-actions {
   padding: 1rem;
-  background: #FFF;
   -moz-box-shadow: 0px 1px 3px -1px #888888;
   -webkit-box-shadow: 0px 1px 3px -1px #888888;
   box-shadow: 0px 1px 3px -1px #888888;
+  background: #FFF;
+}
+/* line 47, ../scss/_modules.scss */
+.corner-actions .external-corner-actions {
+  margin-top: 1rem;
 }
 
-/* line 45, ../scss/_modules.scss */
+/* line 53, ../scss/_modules.scss */
 .errorlist {
   list-style-type: none;
   margin: 0.1rem 0 0 0;

@@ -35,11 +35,19 @@ article
     top: 1rem;
     right: 0.1rem;
 
-    padding: 1rem;
-    
-    background: #FFF;
+    padding: 0.2rem;
 
-    @include box-shadow(0px 1px 3px -1px #888);
+    .internal-corner-actions
+    {
+        padding: 1rem;
+        @include box-shadow(0px 1px 3px -1px #888);
+        background: #FFF;
+    }
+
+    .external-corner-actions
+    {
+        margin-top: 1rem;
+    }
 }
 
 .errorlist
