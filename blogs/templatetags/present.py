@@ -16,4 +16,4 @@ def inner_present(value):
 
 @register.filter
 def present(value):
-    inner_present(value)
+    return inner_present(value)
