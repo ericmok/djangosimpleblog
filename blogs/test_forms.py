@@ -46,20 +46,20 @@ class PostUpdateFormTest(TestCase):
 
     def test_constructor_instance_initialization(self):
         user_instance = get_user_model().objects.create_user(username='asdf', password='asdf')
-        post_instance = Post.objects.create(title='Cats', author=user_instance)
+        post_instance = Post.objects.create_with_edition(title='Cats', author=user_instance, text='Some text to update.')
         form = PostUpdateForm(data={'text': 'This is a test'}, instance=post_instance)
         self.assertTrue(form.is_valid())
         edition = form.save()
 
-        self.assertEqual(Edition.objects.count(), 1)
+        self.assertEqual(Edition.objects.count(), 2)
         self.assertTrue(edition)
 
     def test_save(self):
         user_instance = get_user_model().objects.create_user(username='asdf', password='asdf')
-        post_instance = Post.objects.create(title='Cats', author=user_instance)
+        post_instance = Post.objects.create_with_edition(title='Cats', author=user_instance, text='Initial text.')
         form = PostUpdateForm({'text': 'This is a test'})
         self.assertTrue(form.is_valid())
         edition = form.save(instance = post_instance)
 
-        self.assertEqual(Edition.objects.count(), 1)
+        self.assertEqual(Edition.objects.count(), 2)
         self.assertTrue(edition)

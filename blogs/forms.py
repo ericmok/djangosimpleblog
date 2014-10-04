@@ -29,7 +29,11 @@ class PostUpdateForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.instance = kwargs.pop('instance', None)
+
         super(PostUpdateForm, self).__init__(*args, **kwargs)
+
+        if self.instance:
+            self.initial['text'] = self.instance.editions.first().text
 
     def save(self, instance=None):
         post_instance = instance or self.instance
