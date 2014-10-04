@@ -51,6 +51,7 @@ class PostUpdateFormTest(TestCase):
         self.assertTrue(form.is_valid())
         edition = form.save()
 
+        self.assertEqual(form.cleaned_data['text'], 'This is a test')
         self.assertEqual(Edition.objects.count(), 2)
         self.assertTrue(edition)
 
@@ -61,5 +62,6 @@ class PostUpdateFormTest(TestCase):
         self.assertTrue(form.is_valid())
         edition = form.save(instance = post_instance)
 
+        self.assertEqual(form.cleaned_data['text'], 'This is a test')
         self.assertEqual(Edition.objects.count(), 2)
         self.assertTrue(edition)
