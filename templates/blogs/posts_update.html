@@ -1,6 +1,14 @@
-<h1>update</h1>
-<form method="POST" action="">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Revise" />
-</form>
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="small-12 medium-8 columns small-centered text-center">
+            <h3>{{ post.title }}</h3>
+            <form method="POST" action="">
+                {% csrf_token %}
+                {{ form.text }}
+                <input class="button info round" type="submit" value="Revise" />
+            </form>
+        </div>
+    </div>
+{% endblock %}
