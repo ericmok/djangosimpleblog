@@ -29,6 +29,15 @@ class PresentTest(TestCase):
         self.assertIn('<h1>', markdown_test)
         self.assertIn('src=\"cat.png\"', markdown_test)
 
+    def test_markdown_takes_code(self):
+        new_post = Post.objects.create_with_edition(title='test', author=self.new_user, text='#Test\n\n\n    yup\n    here')
+        self.assertEqual(Post.objects.count(), 1)
+        self.assertEqual(Edition.objects.count(), 1)
+
+        markdown_test = Post.objects.get(id=new_post.id).editions.first().text
+        markdown_test = present(markdown_test)
+        self.assertIn('<code>', markdown_test)
+
     def test_markdown_is_safe(self):
         new_post = Post.objects.create_with_edition(title='test', author=self.new_user, text='<script></script>')
         self.assertEqual(Post.objects.count(), 1)
