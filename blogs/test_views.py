@@ -76,8 +76,8 @@ class PostViews(TestCase):
         self.client.login(username='asdf', password='asdf')
         response = self.client.get(reverse('posts-update', kwargs={'slug': new_post.slug}))
         self.assertEqual(response.status_code, 200)
-        self.assertIsNotNone(response.context.get('form', None))
-        self.assertIsNotNone(response.context.get('post', None))
+        self.assertTrue('form' in response.context)
+        self.assertTrue('post' in response.context)
 
     def test_GET_post_update_with_no_login(self):
         """
