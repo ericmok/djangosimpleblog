@@ -54,8 +54,11 @@
         {% endblock %}
 
     <script>
-        $("code").each(function() {
-            $(this).addClass("prettyprint");
+        $(document).ready(function() {
+            $("code").each(function() {
+                $(this).addClass("prettyprint");
+                prettyPrint();
+            });
         });
     </script>
 </body>
