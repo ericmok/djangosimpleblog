@@ -25,7 +25,7 @@
         <div>{{post.editions.first.created_at}} ({{ post.editions.count }} change{{post.editions.count|pluralize}})</div>
         <div>
             <p>
-                {{ edition.text|present|safe }}
+                {{ post.editions.first.text|present|safe }}
             </p>
         </div>
     </article>
