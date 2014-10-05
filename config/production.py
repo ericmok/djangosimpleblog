@@ -7,6 +7,7 @@ ADMINS = (
 )
 MANAGERS = ADMINS
 
+ALLOWED_HOSTS = ['.eric.buzz']
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
