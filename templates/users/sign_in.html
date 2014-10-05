@@ -20,14 +20,12 @@
                 {% csrf_token %}
                 <div class="row">
                     <div class="small-12">
-                        {{ form.username.errors }}
                         {{ form.username.label_tag }}
                         {{ form.username }}
                     </div>
                 </div>
                 <div class="row">
                     <div class="small-12">
-                        {{ form.password.errors }}
                         {{ form.password.label_tag }}
                         {{ form.password }}
                     </div>
