@@ -1,2 +1,3 @@
 djangosimpleblog
 ================
+Just some practice
